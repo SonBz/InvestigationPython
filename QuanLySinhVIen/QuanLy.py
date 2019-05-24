@@ -6,6 +6,8 @@ class Manage(People):
         super().__init__(name,age)
         self.university=university
         self.Class=Class
+
+
 list_Sv=[]
 Select =0 
 while Select < 5:  
@@ -17,6 +19,7 @@ while Select < 5:
     print("4: Student to Search")
     print("5: Exit The Program")
     Select = int(input("You Choose :"))  
+
     def addStudent():
         print("--You choose more students--")
         wantToAdd =int(input("Number of Student who want to add :"))
@@ -28,53 +31,61 @@ while Select < 5:
             university =input("University :")
             Class = input("Which Class :")
             Student = Manage(name,age,university,Class)
-            out_String=str(Student.name)+"-"+str(Student.age)+"-"+str(Student.university)+"-"+str(Student.Class)+"\n"
-            fileStudent.write(out_String)
+            out_string=str(Student.name)+"-"+str(Student.age)+"-"
+                       +str(Student.university)+"-"+str(Student.Class)+"\n"
+            fileStudent.write(out_string)
             #list_Sv.append(Student) 
         print(" Success (^-^)")
         fileStudent.close()
+    
     def showList():
         print("Students List")
         fileStudent =open("file.txt","r")
         list_Sv = fileStudent.read().split("\n")
         for i in range(len(list_Sv)-1):
-            list_Sv_new=list_Sv[i].split("-")
+            list_sv_new=list_Sv[i].split("-")
             print("--> Student ",i+1)
-            print("Student name :",list_Sv_new[0],"- Age:",list_Sv_new[1],"University :",list_Sv_new[2],"- Class:",list_Sv_new[3])
+            print("Student name :",list_sv_new[0],"- Age:",list_sv_new[1],
+                  "University :",list_sv_new[2],"- Class:",list_sv_new[3])
         fileStudent.close()
+    
     def seach():
         searchType =0
         fileStudent =open("file.txt","r")
-        list_Sv = fileStudent.read().split("\n")
+        list_sv = fileStudent.read().split("\n")
         while searchType < 3:
             print("--Seach Type--")
             print("1:Search by name")
             print("2:Search by age")
             print("3:exit")
             searchType =int(input("You Choose :"))        
+    
             def SearchName():
                 flag =0
                 fullName =input("name to search:")
                 if fullName != " " :
                     for i in range(len(list_Sv)):
-                        list_Sv_new=list_Sv[i].split("-")
+                        list_sv_new=list_sv[i].split("-")
                         if list_Sv[0] == fullName:
                             print("--> Student ",i+1)
-                            print("Student name :",list_Sv_new[0],"- Age:",list_Sv_new[1],"University :",list_Sv_new[2],"- Class:",list_Sv_new[3])
+                            print("Student name :",list_sv_new[0],"- Age:",list_sv_new[1],
+                                  "University :",list_sv_new[2],"- Class:",list_sv_new[3])
                             flag = 1
                     if flag == 0:
                         print("No Student found")
                 else:
                     print("request to enter information")
+    
             def SearchAge():
                 flag =0
                 Age =int(input("age to search :"))
                 if Age != " ":
-                    for i in range(len(list_Sv)):
-                        list_Sv_new=list_Sv[i].split("-")
+                    for i in range(len(list_sv)):
+                        list_sv_new=list_sv[i].split("-")
                         if list_Sv[1] == Age:
                             print("--> Student ",i+1)
-                            print("Student name :",list_Sv_new[0],"- Age:",list_Sv_new[1],"University :",list_Sv_new[2],"- Class:",list_Sv_new[3])
+                            print("Student name :",list_sv_new[0],"- Age:",list_sv_new[1],
+                                  "University :",list_sv_new[2],"- Class:",list_sv_new[3])
                             flag = 1
                     if flag == 0:
                         print("No Student found")
@@ -86,6 +97,7 @@ while Select < 5:
             }
             LuaChoTimKiem.get(searchType, lambda : " Error")()
         fileStudent.close()
+    
     def delete() :
         flag =0
         showList()
