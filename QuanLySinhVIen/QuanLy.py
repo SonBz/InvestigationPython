@@ -8,7 +8,7 @@ class Manage(People):
         self.Class=Class
 
 
-list_Sv=[]
+list_sv=[]
 Select =0 
 while Select < 5:  
     print("")
@@ -31,8 +31,8 @@ while Select < 5:
             university =input("University :")
             Class = input("Which Class :")
             Student = Manage(name,age,university,Class)
-            out_string=str(Student.name)+"-"+str(Student.age)+"-"
-                       +str(Student.university)+"-"+str(Student.Class)+"\n"
+            out_string=str(Student.name)+"-"+str(Student.age)+"-"\
+                        +str(Student.university)+"-"+str(Student.Class)+"\n"
             fileStudent.write(out_string)
             #list_Sv.append(Student) 
         print(" Success (^-^)")
@@ -41,9 +41,9 @@ while Select < 5:
     def showList():
         print("Students List")
         fileStudent =open("file.txt","r")
-        list_Sv = fileStudent.read().split("\n")
-        for i in range(len(list_Sv)-1):
-            list_sv_new=list_Sv[i].split("-")
+        list_sv = fileStudent.read().split("\n")
+        for i in range(len(list_sv)):
+            list_sv_new=list_sv[i].split("-")
             print("--> Student ",i+1)
             print("Student name :",list_sv_new[0],"- Age:",list_sv_new[1],
                   "University :",list_sv_new[2],"- Class:",list_sv_new[3])
@@ -64,9 +64,9 @@ while Select < 5:
                 flag =0
                 fullName =input("name to search:")
                 if fullName != " " :
-                    for i in range(len(list_Sv)):
+                    for i in range(len(list_sv)):
                         list_sv_new=list_sv[i].split("-")
-                        if list_Sv[0] == fullName:
+                        if list_sv_new[0] == fullName:
                             print("--> Student ",i+1)
                             print("Student name :",list_sv_new[0],"- Age:",list_sv_new[1],
                                   "University :",list_sv_new[2],"- Class:",list_sv_new[3])
@@ -78,14 +78,14 @@ while Select < 5:
     
             def SearchAge():
                 flag =0
-                Age =int(input("age to search :"))
+                Age =input("age to search :")
                 if Age != " ":
-                    for i in range(len(list_sv)):
+                    for i in range(len(list_sv)-1):
                         list_sv_new=list_sv[i].split("-")
-                        if list_Sv[1] == Age:
+                        if list_sv_new[1] == Age:
                             print("--> Student ",i+1)
-                            print("Student name :",list_sv_new[0],"- Age:",list_sv_new[1],
-                                  "University :",list_sv_new[2],"- Class:",list_sv_new[3])
+                            print("Student name :",list_sv_new[0]," -Age:",list_sv_new[1],
+                                  "-University :",list_sv_new[2],"- Class:",list_sv_new[3])
                             flag = 1
                     if flag == 0:
                         print("No Student found")
@@ -102,13 +102,14 @@ while Select < 5:
         flag =0
         showList()
         fullNameDel = input(" Full Name :")
-        fileStudent =open("file.txt","r")
-        list_Sv = fileStudent.read().split("\n")
+        fileStudent =open("file.txt","a+")
+        list_sv = fileStudent.read().split("\n")
+        print(list_sv)
         if fullNameDel !="":
-            for i in range(len(list_Sv)-1):
-                list_Sv_new=list_Sv[i].split("-")
-                if list_Sv[0] == fullNameDel:
-                    del list_Sv[i]
+            for i in range(len(list_sv)-1):
+                list_sv_new=list_sv[i].split("-")
+                if  list_sv_new[0] == fullNameDel:
+                    print(list_sv[i])                    
                     print("x--> Delete success")
                     flag=1
             if flag == 0 :
